@@ -26,6 +26,9 @@ $(function () {
         getRecentDay($('#class-sel').val());
     });
     $('#schedule-sel').selectmenu();
+    $('#schedule-sel').selectmenu({'change': function () {
+        getSchedule($('#schedule-sel').val());
+    }});
     updateSchedules();
     $.get('/rest/general/latest', function (general) {
         if (general) {
@@ -155,7 +158,22 @@ $(function () {
             contentType: 'application/json',
             data: JSON.stringify({date: date}),
             success: function () {
-                $('.schedule-dates ul').append('<li>' + date.toLocaleDateString() + '</li>');
+                $('.schedule-dates ul').append('<li>' + date.toLocaleDateString() + '</li>').data('date', date);
+            }
+        });
+    });
+
+    $('.schedule-dates ul').click(function () {
+        var self = this;
+        var name = $('#schedule-sel').val();
+        var url = '/rest/schedules/' + name + '/removedate';
+        var date = $(self).data('date');
+        $.post({
+            url: url,
+            contentType: 'application/json',
+            data: JSON.stringify({date: date}),
+            success: function () {
+                $(self).remove();
             }
         });
     });
@@ -205,6 +223,11 @@ $(function () {
                 $rows.eq(i+1).find('.start-m').val(schedule.entries[i].start[1]);
                 $rows.eq(i+1).find('.end-h').val(schedule.entries[i].end[0]);
                 $rows.eq(i+1).find('.end-m').val(schedule.entries[i].end[1]);
+            }
+            $('.schedule-dates ul').empty();
+            for (i = 0; i < schedule.dates.length; i++) {
+                $('.schedule-dates ul').append('<li>' + new Date(schedule.dates[i]).toLocaleDateString() + '</li>')
+                    .data('date', schedule.dates[i]);
             }
         });
     }

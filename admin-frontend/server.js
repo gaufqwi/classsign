@@ -44,6 +44,19 @@ app.get('/rest/schedules', function (req, res) {
         res.json(s);
     });
 });
+app.get('/rest/schedules/today', function (req, res) {
+    var start = moment().startOf('day');
+    var end = moment(start).add(1, 'days');
+    schedules.findOne({dates: {$elemMatch: {$gte: start.toDate(), $lt: end.toDate()}}}).then(function (s) {
+        if (s) {
+            res.json(s);
+        } else {
+            schedules.findOne({name: 'master'}).then(function (s) {
+                res.json(s);
+            });
+        }
+    });
+});
 app.get('/rest/schedules/:name', function (req, res) {
     schedules.findOne({name: req.params.name}, {fields: {_id: 0}}).then(function (s) {
         res.json(s);
@@ -60,11 +73,12 @@ app.post('/rest/schedules/:name', function (req, res) {
     });
 });
 app.post('/rest/schedules/:name/adddate', function (req, res) {
-    console.log('add', req.body.date);
+    schedules.updateOne({name: req.params.name}, {$push: {dates: new Date(req.body.date)}}, {w: 0});
     res.status(201).end();
 });
 app.post('/rest/schedules/:name/removedate', function (req, res) {
-
+    schedules.updateOne({name: req.params.name}, {$pull: {dates: new Date(req.body.date)}}, {w: 0});
+    res.status(201).end();
 });
 
 // General Info
@@ -84,6 +98,7 @@ app.post('/rest/general/:date', function (req, res) {
     var start = moment(req.params.date, 'YYYYMMDD');
     var end = moment(start).add(1, 'days');
     general.findOne({date: {$gte: start.toDate(), $lt: end.toDate()}}).then(function (g) {
+        req.body.date = new Date(req.body.date);
         if (g) {
             general.updateOne({_id: g._id}, {$set: {announcements: req.body.announcements}}, {w: 0});
         } else {
@@ -110,17 +125,15 @@ app.get('/rest/days/:cid/:date', function (req, res) {
     });
 });
 app.post('/rest/days/:cid/:date', function (req, res) {
-    console.log('post', req.params.cid, req.params.date);
     var start = moment(req.params.date, 'YYYYMMDD');
     var end = moment(start).add(1, 'days');
     days.findOne({class: ObjectID.createFromHexString(req.params.cid),
         date: {$gte: start.toDate(), $lt: end.toDate()}}).then(function (d) {
         req.body.class = ObjectID.createFromHexString(req.body.class);
+        req.body.date = new Date(req.body.date);
         if (d) {
-            console.log('U', req.body);
             days.updateOne({_id: d._id}, {$set: {announcements: req.body.announcements}}, {w: 0});
         } else {
-            console.log('I', req.body);
             days.insert(req.body, {w: 0});
         }
         res.status(201).end();
