@@ -166,6 +166,7 @@ function setSlides (slides) {
         $('.default:visible').hide();
         _slideTimeout = setTimeout(_handleTimeout, 0);
     } else {
+        $('.meta:visible').hide();
         $('.content:visible').hide();
         $('.default').show();
     }
