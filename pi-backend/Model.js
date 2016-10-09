@@ -54,9 +54,4 @@ Model.prototype.findClass = function (name, section) {
     return null;
 };
 
-Model.prototype.setGeneral = function (general) {
-    this.general = general;
-    this.emit('generalupdate');
-};
-
 module.exports = Model;

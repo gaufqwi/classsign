@@ -163,17 +163,17 @@ $(function () {
         });
     });
 
-    $('.schedule-dates ul').click(function () {
-        var self = this;
+    $('.schedule-dates ul').on('click', 'li', function () {
+        var $self = $(this);
         var name = $('#schedule-sel').val();
         var url = '/rest/schedules/' + name + '/removedate';
-        var date = $(self).data('date');
+        var date = $self.data('date');
         $.post({
             url: url,
             contentType: 'application/json',
             data: JSON.stringify({date: date}),
             success: function () {
-                $(self).remove();
+                $self.remove();
             }
         });
     });

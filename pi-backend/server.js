@@ -2,9 +2,13 @@
  * server.js
  */
 'use strict';
-
+const ADMIN_URL = 'http://localhost';
+const ADMIN_PORT = 8080;
+const PORT = 8888;
 const PREFIX = '/../pi-frontend';
 
+var Q = require('q');
+var axios = require('axios');
 var express = require('express');
 var app = express();
 var server = require('http').Server(app);
@@ -45,12 +49,33 @@ io.on('connect', function (socket) {
     })
 });
 
-server.listen(8080, '127.0.0.1', function () {
+server.listen(PORT, '127.0.0.1', function () {
     console.log('pi backend ready');
-    model = new Model(testdata.schedule, testdata.general, testdata.classes);
-    setInterval(function () {
-        model.updateActiveClass();
-    }, 1000);
+    Q.all([
+        axios.get(ADMIN_URL + ':' + ADMIN_PORT + '/pirest/schedule'),
+        axios.get(ADMIN_URL + ':' + ADMIN_PORT + '/pirest/general'),
+        axios.get(ADMIN_URL + ':' + ADMIN_PORT + '/pirest/classes')
+    ]).then(function (results) {
+        model = new Model(results[0].data.entries, results[1].data, results[2].data);
+        setInterval(function () {
+            model.updateActiveClass();
+        }, 1000);
+        setInterval(function () {
+            Q.all([
+                axios.get(ADMIN_URL + ':' + ADMIN_PORT + '/pirest/schedule'),
+                axios.get(ADMIN_URL + ':' + ADMIN_PORT + '/pirest/general'),
+                axios.get(ADMIN_URL + ':' + ADMIN_PORT + '/pirest/classes')
+            ]).then(function (update) {
+                model.schedule = update[0].data.entries;
+                model.general = update[1].data;
+                model.classes = update[2].data;
+            });
+        }, 10*60*1000);
+    });
+    //model = new Model([], {}, []);
+    //setInterval(function () {
+    //    model.updateActiveClass();
+    //}, 1000);
 });
 
 // Thin wrapper to add some error handling

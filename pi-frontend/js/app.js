@@ -28,7 +28,7 @@ $(function () {
         $('#date').html(formatDate(date));
         $('#time').html(formatTime(date));
     }, 1000);
-    var socket = io('http://localhost:8080');
+    var socket = io('http://localhost:8888');
     socket.on('connect', function () {
         $('.meta .message').html('Awaiting class information.');
         // New Class Info
@@ -44,28 +44,29 @@ $(function () {
             // Slides
             var i;
             var slides = [];
-            if (cl.eq) {
+            if (cl.eq && cl.eq.length) {
                 for (i = 0; i < cl.eq.length; i++) {
                     slides.push({type: 'eq', content: cl.eq[i], format: 'general'});
                 }
             }
-            if (cl.standard) {
+            if (cl.standard && cl.standard.length) {
                 for (i = 0; i < cl.standard.length; i++) {
                     slides.push({type: 'standard', content: cl.standard[i], format: 'general'});
                 }
             }
-            if (cl.vocabulary) {
+            if (cl.vocabulary && cl.vocabulary.length) {
                 slides.push({type: 'vocabulary', content: cl.vocabulary, format: 'table'});
             }
-            if (cl.agenda) {
+            if (cl.agenda && cl.agenda.length) {
                 slides.push({type: 'agenda', content: cl.agenda, format: 'list'});
             }
-            console.log('slie', slides.length);
             setSlides(slides);
         });
         // Between classes
         socket.on('noclass', function () {
-
+            $('.content').hide();
+            $('.meta').hide();
+            $('.default').show();
         });
         // New general info
         socket.on('general', function (general) {
@@ -162,9 +163,11 @@ function setSlides (slides) {
     _curSlide = -1;
     if (_slides.length) {
         $('.meta:visible').hide();
+        $('.default:visible').hide();
         _slideTimeout = setTimeout(_handleTimeout, 0);
     } else {
         $('.content:visible').hide();
+        $('.default').show();
     }
     function _handleTimeout () {
         $('.content:visible').hide();
