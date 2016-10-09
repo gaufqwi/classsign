@@ -1,0 +1,16 @@
+.formrow {
+    margin: 4px 0;
+}
+
+.schedule-dates {
+    vertical-align: top;
+}
+
+.schedule-dates ul {
+    width: 12em;
+    list-style: none;
+}
+
+.schedule-dates li:hover {
+    text-decoration: line-through;
+}

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/jquery-ui.structure.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.theme.min.css">
+    <link rel="stylesheet" href="css/app.css">
+    <script src="libs/jquery-3.1.1.min.js"></script>
+    <script src="libs/jquery-ui.min.js"></script>
+    <script src="js/app.js"></script>
+   <title>Title</title>
+</head>
+<body>
+
+<!--<nav>-->
+    <!--<label for="date">Date</label><input id="date">-->
+    <!--&lt;!&ndash;<label for="class">Class</label><select id="class"></select>&ndash;&gt;-->
+<!--</nav>-->
+
+<div id="tabs" class="section">
+    <ul>
+        <li><a href="#schedule-tab">Schedule</a></li>
+        <li><a href="#general-tab">General</a></li>
+        <li><a href="#class-tab">Class</a></li>
+    </ul>
+    <div id="schedule-tab">
+        <nav>
+            <label for="schedule-sel">Schedule</label><select id="schedule-sel"></select>
+        </nav>
+        <table class="schedule">
+            <tr><th>Class</th><th>Section</th><th colspan=2>Start</th><th colspan=2>End</th><th>Dates</th></tr>
+            <tr>
+                <td><input size="30" class="class-name"></td>
+                <td><input size="3" class="class-section"></td>
+                <td><input size="3" class="start-h"></td>
+                <td><input size="3" class="start-m"></td>
+                <td><input size="3" class="end-h"></td>
+                <td><input size="3" class="end-m"></td>
+                <td rowspan="10"  class="schedule-dates"><ul></ul></td>
+            </tr>
+            <tr>
+                <td><input size="30" class="class-name"></td>
+                <td><input size="3" class="class-section"></td>
+                <td><input size="3" class="start-h"></td>
+                <td><input size="3" class="start-m"></td>
+                <td><input size="3" class="end-h"></td>
+                <td><input size="3" class="end-m"></td>
+            </tr>
+            <tr>
+                <td><input size="30" class="class-name"></td>
+                <td><input size="3" class="class-section"></td>
+                <td><input size="3" class="start-h"></td>
+                <td><input size="3" class="start-m"></td>
+                <td><input size="3" class="end-h"></td>
+                <td><input size="3" class="end-m"></td>
+            </tr>
+            <tr>
+                <td><input size="30" class="class-name"></td>
+                <td><input size="3" class="class-section"></td>
+                <td><input size="3" class="start-h"></td>
+                <td><input size="3" class="start-m"></td>
+                <td><input size="3" class="end-h"></td>
+                <td><input size="3" class="end-m"></td>
+            </tr>
+            <tr>
+                <td><input size="30" class="class-name"></td>
+                <td><input size="3" class="class-section"></td>
+                <td><input size="3" class="start-h"></td>
+                <td><input size="3" class="start-m"></td>
+                <td><input size="3" class="end-h"></td>
+                <td><input size="3" class="end-m"></td>
+            </tr>
+            <tr>
+                <td><input size="30" class="class-name"></td>
+                <td><input size="3" class="class-section"></td>
+                <td><input size="3" class="start-h"></td>
+                <td><input size="3" class="start-m"></td>
+                <td><input size="3" class="end-h"></td>
+                <td><input size="3" class="end-m"></td>
+            </tr>
+            <tr>
+                <td><input size="30" class="class-name"></td>
+                <td><input size="3" class="class-section"></td>
+                <td><input size="3" class="start-h"></td>
+                <td><input size="3" class="start-m"></td>
+                <td><input size="3" class="end-h"></td>
+                <td><input size="3" class="end-m"></td>
+            </tr>
+            <tr>
+                <td><input size="30" class="class-name"></td>
+                <td><input size="3" class="class-section"></td>
+                <td><input size="3" class="start-h"></td>
+                <td><input size="3" class="start-m"></td>
+                <td><input size="3" class="end-h"></td>
+                <td><input size="3" class="end-m"></td>
+            </tr>
+            <tr>
+                <td><input size="30" class="class-name"></td>
+                <td><input size="3" class="class-section"></td>
+                <td><input size="3" class="start-h"></td>
+                <td><input size="3" class="start-m"></td>
+                <td><input size="3" class="end-h"></td>
+                <td><input size="3" class="end-m"></td>
+            </tr>
+            <tr>
+                <td><input size="30" class="class-name"></td>
+                <td><input size="3" class="class-section"></td>
+                <td><input size="3" class="start-h"></td>
+                <td><input size="3" class="start-m"></td>
+                <td><input size="3" class="end-h"></td>
+                <td><input size="3" class="end-m"></td>
+            </tr>
+        </table>
+
+        <div class="formrow">
+            <button id="schedule-save">Save As</button> <input id="schedule-save-name">
+            <button id="schedule-apply">Apply Schedule</button>
+            <input class="date" id="schedule-apply-date">
+        </div>
+    </div>
+    <div id="general-tab">
+
+        <h2>Announcements</h2>
+        <div class="gen-announce">
+            <div class="formrow"><input size="40"></div>
+            <div class="formrow"><input size="40"></div>
+            <div class="formrow"><input size="40"></div>
+            <div class="formrow"><input size="40"></div>
+            <div class="formrow"><input size="40"></div>
+            <div class="formrow"><input size="40"></div>
+            <div class="formrow"><input size="40" ></div>
+            <div class="formrow"><input size="40"></div>
+            <div class="formrow"><input size="40"></div>
+            <div class="formrow"><input size="40"></div>
+        </div>
+        <div class="formrow">
+            <button id="announcement-save">Save</button>
+            <input class="date" id="announcement-save-date">
+        </div>
+    </div>
+    <div id="class-tab">
+        <div class="formrow">
+            <select id="class-sel"></select>
+        </div>
+
+        <div class="formrow">
+            <select id="class-copy-sel">
+                <option value="clear">Clear</option>
+            </select>
+            <button id="class-copy-go">Go</button>
+        </div>
+
+        <div class="day">
+            <h2>Essential Questions</h2>
+            <div class="class-eq">
+                <div class="formrow"><textarea row="4" cols="40"></textarea></div>
+                <div class="formrow"><textarea row="4" cols="40"></textarea></div>
+                <div class="formrow"><textarea row="4" cols="40"></textarea></div>
+                <div class="formrow"><textarea row="4" cols="40"></textarea></div>
+            </div>
+
+            <h2>Standards</h2>
+            <div class="class-standards">
+                <div class="formrow"><textarea row="4" cols="40"></textarea></div>
+                <div class="formrow"><textarea row="4" cols="40"></textarea></div>
+                <div class="formrow"><textarea row="4" cols="40"></textarea></div>
+                <div class="formrow"><textarea row="4" cols="40"></textarea></div>
+                <div class="formrow"><textarea row="4" cols="40"></textarea></div>
+                <div class="formrow"><textarea row="4" cols="40"></textarea></div>
+            </div>
+
+            <h2>Agenda</h2>
+            <div class="class-agenda">
+                <div class="formrow"><input size="40"></div>
+                <div class="formrow"><input size="40"></div>
+                <div class="formrow"><input size="40"></div>
+                <div class="formrow"><input size="40"></div>
+                <div class="formrow"><input size="40"></div>
+                <div class="formrow"><input size="40"></div>
+                <div class="formrow"><input size="40" ></div>
+                <div class="formrow"><input size="40"></div>
+            </div>
+
+            <h2>Vocabulary</h2>
+            <table class="class-vocabulary">
+                <tr><td><input size="30"></td><td><input size="30"></td><td><input size="30"></td></tr>
+                <tr><td><input size="30"></td><td><input size="30"></td><td><input size="30"></td></tr>
+                <tr><td><input size="30"></td><td><input size="30"></td><td><input size="30"></td></tr>
+                <tr><td><input size="30"></td><td><input size="30"></td><td><input size="30"></td></tr>
+                <tr><td><input size="30"></td><td><input size="30"></td><td><input size="30"></td></tr>
+            </table>
+
+            <h2>Announcements</h2>
+            <div class="class-announce">
+                <div class="formrow"><input size="40"></div>
+                <div class="formrow"><input size="40"></div>
+                <div class="formrow"><input size="40"></div>
+                <div class="formrow"><input size="40"></div>
+                <div class="formrow"><input size="40"></div>
+                <div class="formrow"><input size="40"></div>
+                <div class="formrow"><input size="40" ></div>
+                <div class="formrow"><input size="40"></div>
+                <div class="formrow"><input size="40"></div>
+                <div class="formrow"><input size="40"></div>
+            </div>
+        </div>
+        <div class="formrow">
+            <button id="class-save">Save</button>
+            <input class="date" id="class-save-date">
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

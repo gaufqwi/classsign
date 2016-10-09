@@ -1,0 +1,98 @@
+body {
+    margin: 0;
+    font-family: Helvetica, Arial, sans-serif;
+    color: white;
+}
+
+header {
+    margin: 0;
+    width: 100vw;
+    max-width: 100%;
+    height: 15vh;
+    background-color: purple;
+    text-align: center;
+    font-size: 13vh;
+    text-shadow: grey 2px 2px;
+}
+
+.datetime {
+    font-size: 50%;
+    text-shadow: none;
+}
+
+#date {
+    margin: 4vh 0 0 2vw;
+    float: left;
+}
+
+#time {
+    margin: 4vh 2vw 0 0;
+    float: right;
+}
+
+footer {
+    position: relative;
+    margin: 0;
+    width: 100vw;
+    max-width: 100%;
+    height: 10vh;
+    background-color:green;
+    text-align: center;
+    font-size: 9vh;
+    text-shadow: grey 2px 2px;
+    overflow: hidden;
+}
+
+footer div {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+.main {
+    margin: 0;
+    padding: .5vh .5vw;
+    width: 99vw;
+    max-width: 100%;
+    height: 74vh;
+    background-color: blue;
+    font-size: 10vh;
+}
+
+.sidebar {
+    margin: 0;
+    width: 30vh;
+    height: 75vh;
+    background-color: black;
+    float: left;
+}
+
+.content {
+    padding: 8px;
+    position: relative;
+    font-size: 16vh;
+}
+
+.content h1 {
+    margin: 0;
+    color: yellow;
+    text-shadow: grey 2px 2px;
+    font-size: 12vh;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+footer .bold {
+    color: yellow;
+}
+
+ul {
+    list-style-position: inside;
+}
+
+td.center {
+    text-align: center;
+}
