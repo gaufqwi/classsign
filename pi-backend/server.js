@@ -67,9 +67,17 @@ Q.all([
             axios.get(ADMIN_URL + ':' + ADMIN_PORT + '/pirest/general'),
             axios.get(ADMIN_URL + ':' + ADMIN_PORT + '/pirest/classes')
         ]).then(function (update) {
-            model.schedule = update[0].data.entries;
-            model.general = update[1].data;
-            model.classes = update[2].data;
+            if (update[0].data.entries && update[0].data.entries.length) {
+                model.schedule = update[0].data.entries;
+            }
+            if (update[1].data) {
+                model.general = update[1].data;
+            }
+            if (update[2].data) {
+                model.classes = update[2].data;
+            }
+        }).catch(function (reason) {
+            console.log('Problem connecting to upstream server:', reason);
         });
     }, 10*60*1000);
     server.listen(PORT, '127.0.0.1', function () {

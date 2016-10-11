@@ -183,6 +183,7 @@ $(function () {
         $('.day input').val('');
         $.get('/rest/days/' + cid + '/latest', function (day) {
             if (day) {
+                $('#class-save-date').datepicker('setDate', new Date(day.date));
                 var i, $els;
                 $els = $('.class-eq textarea');
                 for (i = 0; i < day.eq.length; i++) {
